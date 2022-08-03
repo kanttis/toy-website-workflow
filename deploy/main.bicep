@@ -49,6 +49,9 @@ var toyManualsStorageAccountConnectionString = 'DefaultEndpointsProtocol=https;A
 
 resource appServicePlan 'Microsoft.Web/serverFarms@2020-06-01' = {
   name: appServicePlanName
+  tags: {
+    Environment: 'nonprod'
+  }
   location: location
   sku: environmentConfigurationMap[environmentType].appServicePlan.sku
 }
@@ -56,6 +59,9 @@ resource appServicePlan 'Microsoft.Web/serverFarms@2020-06-01' = {
 resource appServiceApp 'Microsoft.Web/sites@2020-06-01' = {
   name: appServiceAppName
   location: location
+  tags: {
+    Environment: 'nonprod'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     httpsOnly: true
@@ -73,6 +79,9 @@ resource appServiceApp 'Microsoft.Web/sites@2020-06-01' = {
 resource toyManualsStorageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   name: toyManualsStorageAccountName
   location: location
+  tags: {
+    Environment: 'nonprod'
+  }
   kind: 'StorageV2'
   sku: environmentConfigurationMap[environmentType].toyManualsStorageAccount.sku
 }
